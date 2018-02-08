@@ -74,18 +74,18 @@ public:
 	// Constructor 
 	ABB() : raiz(NULL), actual(NULL) {}
 
-	// Insertar en ·rbol ordenado:
+	// Insertar en √°rbol ordenado:
 	void Insertar(const DATO dat, const int prior);
-	// Borrar un elemento del ·rbol:
+	// Borrar un elemento del √°rbol:
 	void Borrar(const DATO dat);
-	// FunciÛn de b˙squeda:
+	// Funci√≥n de b√∫squeda:
 	bool Buscar(const DATO dat);
 	DATO BuscarLetra(const string mors);
-	// Comprobar si el ·rbol est· vacÌo:
+	// Comprobar si el √°rbol est√° vac√≠o:
 	bool Vacio(Nodo<DATO> *r) { return r == NULL; }
 	// Comprobar si es un nodo hoja:
 	bool EsHoja(Nodo<DATO> *r) { return !r->derecho && !r->izquierdo; }
-	// Contar n˙mero de nodos:
+	// Contar n√∫mero de nodos:
 	const int NumeroNodos();
 	const int AlturaArbol();
 	// Calcular altura de un dato:
@@ -94,7 +94,7 @@ public:
 	DATO &ValorActual() { return actual->dato; }
 	// Moverse al nodo raiz:
 	void Raiz() { actual = raiz; }
-	// Aplicar una funciÛn a cada elemento del ·rbol:
+	// Aplicar una funci√≥n a cada elemento del √°rbol:
 	void InOrden(void(*func)(DATO&), Nodo<DATO> *nodo = NULL, bool r = true);
 	void PreOrden(void(*func)(DATO&), Nodo<DATO> *nodo = NULL, bool r = true);
 	void PostOrden(void(*func)(DATO&), Nodo<DATO> *nodo = NULL, bool r = true);
@@ -125,13 +125,13 @@ void ABB<DATO>::dibujarArbol(Nodo<DATO> *r, int altura) {
 }//dibujarArbol
 
 
-// Insertar un dato en el ·rbol ABB
+// Insertar un dato en el √°rbol ABB
 template<class DATO>
 void ABB<DATO>::Insertar(const DATO dat, const int prior)
 {
 	Nodo<DATO> *padre = NULL;
 	actual = raiz;
-	// Buscar el dato en el ·rbol, manteniendo un puntero al nodo padre
+	// Buscar el dato en el √°rbol, manteniendo un puntero al nodo padre
 	while (!Vacio(actual) && dat != actual->dato) {
 		padre = actual;
 		if (prior > actual->prioridad) actual = actual->derecho;
@@ -140,7 +140,7 @@ void ABB<DATO>::Insertar(const DATO dat, const int prior)
 
 	// Si se ha encontrado el elemento, regresar sin insertar
 	if (!Vacio(actual)) return;
-	// Si padre es NULL, entonces el ·rbol estaba vacÌo, el nuevo nodo ser·
+	// Si padre es NULL, entonces el √°rbol estaba vac√≠o, el nuevo nodo ser√°
 	// el nodo raiz
 	if (Vacio(padre))
 	{
@@ -156,7 +156,7 @@ void ABB<DATO>::Insertar(const DATO dat, const int prior)
 	else if (prior > padre->prioridad) padre->derecho = new Nodo<DATO>(dat, prior);
 }
 
-// Eliminar un elemento de un ·rbol ABB
+// Eliminar un elemento de un √°rbol ABB
 template<class DATO>
 void ABB<DATO>::Borrar(const DATO dat)
 {
@@ -165,10 +165,10 @@ void ABB<DATO>::Borrar(const DATO dat)
 	DATO aux;
 
 	actual = raiz;
-	// Mientras sea posible que el valor estÈ en el ·rbol
+	// Mientras sea posible que el valor est√© en el √°rbol
 	while (!Vacio(actual)) {
-		if (dat == actual->dato) { // Si el valor est· en el nodo actual
-			if (EsHoja(actual)) { // Y si adem·s es un nodo hoja: lo borramos
+		if (dat == actual->dato) { // Si el valor est√° en el nodo actual
+			if (EsHoja(actual)) { // Y si adem√°s es un nodo hoja: lo borramos
 				if (padre) // Si tiene padre (no es el nodo raiz)
 						   // Anulamos el puntero que le hace referencia
 					if (padre->derecho == actual) padre->derecho = NULL;
@@ -177,10 +177,10 @@ void ABB<DATO>::Borrar(const DATO dat)
 					actual = NULL;
 					return;
 			}
-			else { // Si el valor est· en el nodo actual, pero no es hoja
+			else { // Si el valor est√° en el nodo actual, pero no es hoja
 				   // Buscar nodo
 				padre = actual;
-				// Buscar nodo m·s izquierdo de rama derecha
+				// Buscar nodo m√°s izquierdo de rama derecha
 				if (actual->derecho) {
 					nodo = actual->derecho;
 					while (nodo->izquierdo) {
@@ -188,7 +188,7 @@ void ABB<DATO>::Borrar(const DATO dat)
 						nodo = nodo->izquierdo;
 					}
 				}
-				// O buscar nodo m·s derecho de rama izquierda
+				// O buscar nodo m√°s derecho de rama izquierda
 				else {
 					nodo = actual->izquierdo;
 					while (nodo->derecho) {
@@ -198,15 +198,15 @@ void ABB<DATO>::Borrar(const DATO dat)
 				}
 				// Intercambiar valores de no a borrar u nodo encontrado
 				// y continuar, cerrando el bucle. El nodo encontrado no tiene
-				// por quÈ ser un nodo hoja, cerrando el bucle nos aseguramos
-				// de que sÛlo se eliminan nodos hoja.
+				// por qu√© ser un nodo hoja, cerrando el bucle nos aseguramos
+				// de que s√≥lo se eliminan nodos hoja.
 				aux = actual->dato;
 				actual->dato = nodo->dato;
 				nodo->dato = aux;
 				actual = nodo;
 			}
 		}
-		else { // TodavÌa no hemos encontrado el valor, seguir busc·ndolo
+		else { // Todav√≠a no hemos encontrado el valor, seguir busc√°ndolo
 			padre = actual;
 			if (dat > actual->dato) actual = actual->derecho;
 			else if (dat < actual->dato) actual = actual->izquierdo;
@@ -214,7 +214,7 @@ void ABB<DATO>::Borrar(const DATO dat)
 	}
 }
 
-// Recorrido de ·rbol en inorden, aplicamos la funciÛn func, que tiene
+// Recorrido de √°rbol en inorden, aplicamos la funci√≥n func, que tiene
 // el prototipo:
 // template<class DATO> void func(DATO&);
 template<class DATO>
@@ -226,7 +226,7 @@ void ABB<DATO>::InOrden(void(*func)(DATO&), Nodo<DATO> *nodo, bool r)
 	if (nodo->derecho) InOrden(func, nodo->derecho, false);
 }
 
-// Recorrido de ·rbol en preorden, aplicamos la funciÛn func, que tiene
+// Recorrido de √°rbol en preorden, aplicamos la funci√≥n func, que tiene
 // el prototipo:
 // template<class DATO> void func(DATO&);
 template<class DATO>
@@ -238,7 +238,7 @@ void ABB<DATO>::PreOrden(void(*func)(DATO&), Nodo<DATO> *nodo, bool r)
 	if (nodo->derecho) PreOrden(func, nodo->derecho, false);
 }
 
-// Recorrido de ·rbol en postorden, aplicamos la funciÛn func, que tiene
+// Recorrido de √°rbol en postorden, aplicamos la funci√≥n func, que tiene
 // el prototipo:
 // template<class DATO> void func(DATO&);
 template<class DATO>
@@ -250,19 +250,19 @@ void ABB<DATO>::PostOrden(void(*func)(DATO&), Nodo<DATO> *nodo, bool r)
 	func(nodo->dato);
 }
 
-// Buscar un valor en el ·rbol
+// Buscar un valor en el √°rbol
 template<class DATO>
 bool ABB<DATO>::Buscar(const DATO dat)
 {
 	actual = raiz;
 
-	// TodavÌa puede aparecer, ya que quedan nodos por mirar
+	// Todav√≠a puede aparecer, ya que quedan nodos por mirar
 	while (!Vacio(actual)) {
 		if (dat == actual->dato) return true; // dato encontrado
 		else if (dat > actual->dato) actual = actual->derecho; // Seguir
 		else if (dat < actual->dato) actual = actual->izquierdo;
 	}
-	return false; // No est· en ·rbol
+	return false; // No est√° en √°rbol
 }
 
 template<class DATO>
@@ -289,7 +289,7 @@ int ABB<DATO>::Altura(const DATO dat)
 	int altura = 0;
 	actual = raiz;
 
-	// TodavÌa puede aparecer, ya que quedan nodos por mirar
+	// Todav√≠a puede aparecer, ya que quedan nodos por mirar
 	while (!Vacio(actual)) {
 		if (dat == actual->dato) return altura; // dato encontrado
 		else {
@@ -298,20 +298,20 @@ int ABB<DATO>::Altura(const DATO dat)
 			else if (dat < actual->dato) actual = actual->izquierdo;
 		}
 	}
-	return -1; // No est· en ·rbol
+	return -1; // No est√° en √°rbol
 }
 
-// Contar el n˙mero de nodos
+// Contar el n√∫mero de nodos
 template<class DATO>
 const int ABB<DATO>::NumeroNodos()
 {
 	contador = 0;
 
-	auxContador(raiz); // FUnciÛn auxiliar
+	auxContador(raiz); // FUnci√≥n auxiliar
 	return contador;
 }
 
-// FunciÛn auxiliar para contar nodos. FunciÛn recursiva de recorrido en
+// Funci√≥n auxiliar para contar nodos. Funci√≥n recursiva de recorrido en
 //   preorden, el proceso es aumentar el contador
 template<class DATO>
 void ABB<DATO>::auxContador(Nodo<DATO> *nodo)
@@ -322,19 +322,19 @@ void ABB<DATO>::auxContador(Nodo<DATO> *nodo)
 	if (nodo->derecho)   auxContador(nodo->derecho);
 }
 
-// Calcular la altura del ·rbol, que es la altura del nodo de mayor altura.
+// Calcular la altura del √°rbol, que es la altura del nodo de mayor altura.
 template<class DATO>
 const int ABB<DATO>::AlturaArbol()
 {
 	altura = 0;
 
-	auxAltura(raiz, 0); // FunciÛn auxiliar
+	auxAltura(raiz, 0); // Funci√≥n auxiliar
 	return altura;
 }
 
-// FunciÛn auxiliar para calcular altura. FunciÛn recursiva de recorrido en
-// postorden, el proceso es actualizar la altura sÛlo en nodos hojas de mayor
-// altura de la m·xima actual
+// Funci√≥n auxiliar para calcular altura. Funci√≥n recursiva de recorrido en
+// postorden, el proceso es actualizar la altura s√≥lo en nodos hojas de mayor
+// altura de la m√°xima actual
 template<class DATO>
 void ABB<DATO>::auxAltura(Nodo<DATO> *nodo, int a)
 {
@@ -342,11 +342,11 @@ void ABB<DATO>::auxAltura(Nodo<DATO> *nodo, int a)
 	if (nodo->izquierdo) auxAltura(nodo->izquierdo, a + 1);
 	if (nodo->derecho)   auxAltura(nodo->derecho, a + 1);
 	// Proceso, si es un nodo hoja, y su altura es mayor que la actual del
-	// ·rbol, actualizamos la altura actual del ·rbol
+	// √°rbol, actualizamos la altura actual del √°rbol
 	if (EsHoja(nodo) && a > altura) altura = a;
 }
 
-// FunciÛn de prueba para recorridos del ·rbol
+// Funci√≥n de prueba para recorridos del √°rbol
 template <class DATO>
 void Mostrar(DATO &d)
 {
