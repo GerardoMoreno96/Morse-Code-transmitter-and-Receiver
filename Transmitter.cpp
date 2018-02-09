@@ -48,14 +48,14 @@ lista<TIPO>::~lista()
 {
 	nodo<TIPO> *Nodo;
 
-	// Mientras la lista tenga más de un nodo
+	// Mientras la lista tenga mÃ¡s de un nodo
 	while (actual->siguiente != actual) {
 		// Borrar el nodo siguiente al apuntado por lista
 		Nodo = actual->siguiente;
 		actual->siguiente = Nodo->siguiente;
 		delete Nodo;
 	}
-	// Y borrar el último nodo
+	// Y borrar el Ãºltimo nodo
 	delete actual;
 	actual = NULL;
 }
@@ -68,8 +68,8 @@ void lista<TIPO>::Insertar(string v)
 	// Creamos un nodo para el nuevo valor a insertar
 	Nodo = new nodo<string>(v);
 
-	// Si la lista está vacía, la lista será el nuevo nodo
-	// Si no lo está, insertamos el nuevo nodo a continuación del apuntado
+	// Si la lista estÃ¡ vacÃ­a, la lista serÃ¡ el nuevo nodo
+	// Si no lo estÃ¡, insertamos el nuevo nodo a continuaciÃ³n del apuntado
 	// por lista
 	if (actual == NULL) actual = Nodo;
 	else Nodo->siguiente = actual->siguiente;
@@ -90,14 +90,14 @@ void lista<TIPO>::Borrar(TIPO v)
 	} while (actual->siguiente->valor != v && actual != Nodo);
 	// Si existe un nodo con el valor v:
 	if (actual->siguiente->valor == v) {
-		// Y si la lista sólo tiene un nodo
+		// Y si la lista sÃ³lo tiene un nodo
 		if (actual == actual->siguiente) {
 			// Borrar toda la lista
 			delete actual;
 			actual = NULL;
 		}
 		else {
-			// Si la lista tiene más de un nodo, borrar el nodo  de valor v
+			// Si la lista tiene mÃ¡s de un nodo, borrar el nodo  de valor v
 			Nodo = actual->siguiente;
 			actual->siguiente = Nodo->siguiente;
 			delete Nodo;
@@ -568,7 +568,7 @@ int main()
 					arduino->WriteLine("2");
 				}
 				else
-					Console::WriteLine(answer + " no es válido");
+					Console::WriteLine(answer + " no es vÃ¡lido");
 				// ask user if he wants to contineu
 			}
 			Console::WriteLine("Emitir otra letra? si/no");
